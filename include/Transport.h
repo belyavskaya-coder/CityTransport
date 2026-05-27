@@ -1,61 +1,44 @@
 #pragma once
-#include <iostream>
 #include <string>
-using namespace std;
+
 struct CTime
 {
-    unsigned short int hour;
-    unsigned short int minute;
-    unsigned short int second;
+    unsigned short hour;
+    unsigned short minute;
+    unsigned short second;
 };
 
 class Transport
-{ 
+{
 private:
-
     unsigned int routeNumber;
-    string transportType;
+    std::string transportType;
     float price;
     CTime travelTime;
     unsigned int stops;
-    string departure;
-    string destination;
+    std::string departure;
+    std::string destination;
 
-  public:
-      Transport();
-      
-      Transport(
+public:
+    Transport();
+
+    Transport(
         unsigned int routeNumber,
-        string transportType,
+        std::string transportType,
         float price,
         CTime travelTime,
         unsigned int stops,
-        string departure,
-        string destination
-      );
-      void print() const;
+        std::string departure,
+        std::string destination
+    );
 
-        unsigned int getRouteNumber() const;
-        string getTransportType() const;
-        float getPrice() const;
-        CTime getTravelTime() const;
-        unsigned int getStops() const;
-        string getDeparture() const;
-        string getDestination() const;
-        
-    };
+    void print() const;
 
-
-      
-
-
-
-
-
-
-
-
-
-
-
-
+    unsigned int getRouteNumber() const;
+    std::string getTransportType() const;
+    float getPrice() const;
+    CTime getTravelTime() const;
+    unsigned int getStops() const;
+    std::string getDeparture() const;
+    std::string getDestination() const;
+};

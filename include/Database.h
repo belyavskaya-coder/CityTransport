@@ -1,25 +1,18 @@
 #pragma once
-#include <vector>
-#include <fstream>
-#include "Transport.h"
-
-
-#pragma once
 
 #include <vector>
 #include <fstream>
+#include <string>
 #include "Transport.h"
-
-using namespace std;
 
 class Database
 {
 private:
-    vector<Transport> transports;
+    std::vector<Transport> transports;
 
 public:
-    void loadFromFile(string filename);
-    void saveToFile(string filename);
+    void loadFromFile(std::string filename);
+    void saveToFile(std::string filename);
     void showDatabase() const;
     void addTransport();
     void deleteTransport(unsigned int index);

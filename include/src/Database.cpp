@@ -140,26 +140,40 @@ void Database::filterByPrice(float minPrice, float maxPrice) const
 
 void Database::taskMinimumStops() const
 {
+    std::vector<std::pair<std::string, std::string>> processedPairs;
+
     for (size_t i = 0; i < transports.size(); i++)
     {
-        bool minimum = true;
-        for (size_t j = 0; j < transports.size(); j++)
-        {
-            if (i != j &&
-                transports[i].getDeparture() == transports[j].getDeparture() &&
-                transports[i].getDestination() == transports[j].getDestination() &&
-                transports[j].getStops() < transports[i].getStops())
-            {
-                minimum = false;
+        std::string from = transports[i].getDeparture();
+        std::string to = transports[i].getDestination();
+
+        bool alreadyDone = false;
+        for (const auto& pair : processedPairs) {
+            if (pair.first == from && pair.second == to) {
+                alreadyDone = true;
                 break;
             }
         }
-        if (minimum)
+        if (alreadyDone) continue;
+
+        size_t minIndex = i;
+
+        for (size_t j = 0; j < transports.size(); j++)
         {
-            transports[i].print();
+            if (transports[j].getDeparture() == from && transports[j].getDestination() == to)
+            {
+                if (transports[j].getStops() < transports[minIndex].getStops())
+                {
+                    minIndex = j;
+                }
+            }
         }
+
+        transports[minIndex].print();
+        processedPairs.push_back({from, to});
     }
 }
+
 
 void Database::taskTravelTime(CTime maxTime) const
 {
